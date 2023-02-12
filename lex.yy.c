@@ -837,7 +837,7 @@ YY_RULE_SETUP
 case 14:
 YY_RULE_SETUP
 #line 24 "ass.l"
-{printf("Error on line Number: %d\n",lnum);}
+{cerr<<"Error on line Number:"<<lnum<<"\n";}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP

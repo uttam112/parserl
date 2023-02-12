@@ -21,7 +21,7 @@ SECTION "Section"[^\n]*":"[^\n]+
 "." {return FULLSTOP;}
 "?" {return QUESTIONMARK;}
 "!" {return EXCLAMATION;}
-. {printf("Error on line Number: %d\n",lnum);}
+. {cerr<<"Error on line Number:"<<lnum<<"\n";}
 %%
 
 int yywrap() { }
