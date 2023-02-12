@@ -84,9 +84,14 @@ int num_exclamatory = 0;
 int num_interrogative = 0;
 int num_words=0;
 int num_paragraphs = 0;
+int line_num = 1;
 string s;
+bool flag = false;
+extern int yylex();
+extern int yyparse();
+extern FILE* yyin;
 
-#line 90 "ass.tab.c"
+#line 95 "ass.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -153,13 +158,13 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 21 "ass.y"
+#line 26 "ass.y"
 
 char* str;
 int num ;
 char sym;
 
-#line 163 "ass.tab.c"
+#line 168 "ass.tab.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -535,9 +540,9 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    35,    35,    36,    41,    42,    43,    44,    45,    49,
-      52,    53,    56,    59,    60,    61,    64,    65,    66,    69,
-      70,    73,    74,    75
+       0,    40,    40,    41,    46,    47,    48,    49,    50,    54,
+      57,    58,    61,    64,    65,    66,    69,    70,    71,    74,
+      75,    78,    79,    80
 };
 #endif
 
@@ -1339,55 +1344,61 @@ yyreduce:
   switch (yyn)
     {
   case 4:
-#line 41 "ass.y"
+#line 46 "ass.y"
             {printf("%s\n",(yyvsp[0].str));}
-#line 1345 "ass.tab.c"
+#line 1350 "ass.tab.c"
     break;
 
   case 5:
-#line 42 "ass.y"
+#line 47 "ass.y"
             {s+=string((yyvsp[0].str)) + "\n";num_Chapters++;}
-#line 1351 "ass.tab.c"
+#line 1356 "ass.tab.c"
     break;
 
   case 6:
-#line 43 "ass.y"
+#line 48 "ass.y"
             {s+="   "+string((yyvsp[0].str)) + "\n";num_Sections++;}
-#line 1357 "ass.tab.c"
+#line 1362 "ass.tab.c"
     break;
 
   case 9:
-#line 49 "ass.y"
+#line 54 "ass.y"
             {num_paragraphs++;}
-#line 1363 "ass.tab.c"
+#line 1368 "ass.tab.c"
+    break;
+
+  case 12:
+#line 61 "ass.y"
+               {line_num++;}
+#line 1374 "ass.tab.c"
     break;
 
   case 16:
-#line 64 "ass.y"
+#line 69 "ass.y"
                {num_declarative++;}
-#line 1369 "ass.tab.c"
+#line 1380 "ass.tab.c"
     break;
 
   case 17:
-#line 65 "ass.y"
+#line 70 "ass.y"
                  {num_exclamatory++;}
-#line 1375 "ass.tab.c"
+#line 1386 "ass.tab.c"
     break;
 
   case 18:
-#line 66 "ass.y"
+#line 71 "ass.y"
                   {num_interrogative++;}
-#line 1381 "ass.tab.c"
+#line 1392 "ass.tab.c"
     break;
 
   case 19:
-#line 69 "ass.y"
+#line 74 "ass.y"
          {num_words++;}
-#line 1387 "ass.tab.c"
+#line 1398 "ass.tab.c"
     break;
 
 
-#line 1391 "ass.tab.c"
+#line 1402 "ass.tab.c"
 
       default: break;
     }
@@ -1619,13 +1630,15 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 78 "ass.y"
+#line 83 "ass.y"
 
 
 int main() {
-freopen ("input.txt", "r", stdin);  //a.txt holds the expression
-    yyparse();
 
+freopen("out.txt","w",stdout);
+freopen ("input.txt", "r", stdin);  //a.txt holds the expression
+yyparse();
+if(flag)return 0;
 num_sentence = num_interrogative + num_declarative + num_exclamatory;
 
 printf("\nNumber of Chapters   : %d\n",num_Chapters);
@@ -1643,7 +1656,8 @@ return 0;
 }
 
 int yyerror(char* s){
-printf("ERROR: %s\n",s);
+flag = true;
+cerr<<"ERROR: "<<s<<" at Line Number:" <<line_num<<"\n";
 return 0;
 }
 

@@ -15,7 +15,12 @@ int num_exclamatory = 0;
 int num_interrogative = 0;
 int num_words=0;
 int num_paragraphs = 0;
+int line_num = 1;
 string s;
+bool flag = false;
+extern int yylex();
+extern int yyparse();
+extern FILE* yyin;
 %}
 
 %union {
@@ -53,7 +58,7 @@ para:
     |   sentences end para;
 
 para_breaker:
-         BREAK;
+         BREAK {line_num++;}
 
 sentences:
      word sentences 
@@ -78,9 +83,11 @@ seperator:
 %%
 
 int main() {
-freopen ("input.txt", "r", stdin);  //a.txt holds the expression
-    yyparse();
 
+freopen("out.txt","w",stdout);
+freopen ("input.txt", "r", stdin);  //a.txt holds the expression
+yyparse();
+if(flag)return 0;
 num_sentence = num_interrogative + num_declarative + num_exclamatory;
 
 printf("\nNumber of Chapters   : %d\n",num_Chapters);
@@ -98,7 +105,8 @@ return 0;
 }
 
 int yyerror(char* s){
-printf("ERROR: %s\n",s);
+flag = true;
+cerr<<"ERROR: "<<s<<" at Line Number:" <<line_num<<"\n";
 return 0;
 }
 
