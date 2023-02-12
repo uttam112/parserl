@@ -51,7 +51,16 @@ extern int yydebug;
   {
     TITLE = 258,
     CHAPTER = 259,
-    SECTION = 260
+    SECTION = 260,
+    SPACE = 261,
+    COMMA = 262,
+    SEMICOLON = 263,
+    FULLSTOP = 264,
+    EXCLAMATION = 265,
+    QUESTIONMARK = 266,
+    WORD = 267,
+    NUMBER = 268,
+    BREAK = 269
   };
 #endif
 
@@ -59,13 +68,13 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 12 "ass.y"
+#line 21 "ass.y"
 
 char* str;
 int num ;
 char sym;
 
-#line 69 "ass.tab.h"
+#line 78 "ass.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
