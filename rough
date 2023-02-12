@@ -1,0 +1,77 @@
+%{
+//https://github.com/sanved77/flexbison/blob/master/test.y
+#include <bits/stdc++.h>
+using namespace std;
+#include "ass.tab.h"
+void showError();
+
+int num_Chapters = 0;
+int num_Sections = 0;
+
+int num_paragraphs = 0; // may! start after a chapter or section. para1 \n\n para2 
+
+int num_sentences = 0;
+int num_words = 0; // ignore title, chapter, section lines also ignore digits and numbers
+
+
+int num_declarative = 0;
+int num_exclamatory = 0;
+int num_interrogative = 0;
+
+
+
+//Whitespace ,comma, and semicolon are valid separators between any two words within a sentence.
+%}
+
+
+TITLE "Title:"[^\n]+ 
+CHAPTER "Chapter"[^\n]*":"[^\n]+ 
+SECTION "Section"[^\n]*":"[^\n]+ 
+
+
+%%
+[ \t\f\r\n"\r\n"]+ {/*eat up white spaces*/}
+{TITLE}    {yylval.str = yytext; return TITLE;}
+{CHAPTER}  {yylval.str = yytext; return CHAPTER;}
+{SECTION}  {yylval.str = yytext; return SECTION;}
+.* {printf("%s\n",yytext); num_paragraphs++;
+    for (int i = 0; yytext[i] != '\0'; ++i){
+    if(yytext[i]=='.'){num_declarative++; continue;}
+    if(yytext[i]=='?'){num_interrogative++; continue;}
+    if(yytext[i]=='!'){num_exclamatory++; continue;}
+    if( yytext[i]!=' ' && yytext[i]!=',' && yytext[i]!=';' && yytext[i]!='.' && yytext[i]!='?' && yytext[i]!='!' && (yytext[i+1]==' ' || yytext[i+1]==',' || yytext[i+1]==';' || yytext[i+1]=='.' || yytext[i+1]=='?' || yytext[i+1]=='!'))num_words++;
+    }
+    printf("words =  %d\n",num_words); 
+
+
+
+    }
+
+
+
+.      		       {printf("------------%s----------\n",yytext);}
+
+%%
+
+
+void showError(){
+    printf("Other input");
+}
+int yywrap(){
+    return 1;
+}
+int main(){
+FILE *fp;
+char filename[50];
+printf("Enter the filename: \n");
+scanf("%s",filename);
+fp = fopen(filename,"r");
+yyin = fp;
+yylex();
+
+printf("num_Chapters= %d\n",num_Chapters);
+printf("num_declarative= %d\n",num_declarative);
+printf("num_interrogative= %d\n",num_interrogative);
+printf("num_exclamatory= %d\n",num_exclamatory);
+printf("num_paragraphs= %d\n",num_paragraphs);
+}
