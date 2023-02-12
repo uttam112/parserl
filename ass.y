@@ -25,8 +25,7 @@ extern FILE* yyin;
 
 %union {
 char* str;
-int num ;
-char sym;
+
 }
 
 

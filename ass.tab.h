@@ -71,10 +71,9 @@ union YYSTYPE
 #line 26 "ass.y"
 
 char* str;
-int num ;
-char sym;
 
-#line 78 "ass.tab.h"
+
+#line 77 "ass.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

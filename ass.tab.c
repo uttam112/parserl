@@ -161,10 +161,9 @@ union YYSTYPE
 #line 26 "ass.y"
 
 char* str;
-int num ;
-char sym;
 
-#line 168 "ass.tab.c"
+
+#line 167 "ass.tab.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -540,9 +539,9 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    40,    40,    41,    46,    47,    48,    49,    50,    54,
-      57,    58,    61,    64,    65,    66,    69,    70,    71,    74,
-      75,    78,    79,    80
+       0,    39,    39,    40,    45,    46,    47,    48,    49,    53,
+      56,    57,    60,    63,    64,    65,    68,    69,    70,    73,
+      74,    77,    78,    79
 };
 #endif
 
@@ -1344,61 +1343,61 @@ yyreduce:
   switch (yyn)
     {
   case 4:
-#line 46 "ass.y"
+#line 45 "ass.y"
             {printf("%s\n",(yyvsp[0].str));}
-#line 1350 "ass.tab.c"
+#line 1349 "ass.tab.c"
     break;
 
   case 5:
-#line 47 "ass.y"
+#line 46 "ass.y"
             {s+=string((yyvsp[0].str)) + "\n";num_Chapters++;}
-#line 1356 "ass.tab.c"
+#line 1355 "ass.tab.c"
     break;
 
   case 6:
-#line 48 "ass.y"
+#line 47 "ass.y"
             {s+="   "+string((yyvsp[0].str)) + "\n";num_Sections++;}
-#line 1362 "ass.tab.c"
+#line 1361 "ass.tab.c"
     break;
 
   case 9:
-#line 54 "ass.y"
+#line 53 "ass.y"
             {num_paragraphs++;}
-#line 1368 "ass.tab.c"
+#line 1367 "ass.tab.c"
     break;
 
   case 12:
-#line 61 "ass.y"
+#line 60 "ass.y"
                {line_num++;}
-#line 1374 "ass.tab.c"
+#line 1373 "ass.tab.c"
     break;
 
   case 16:
-#line 69 "ass.y"
+#line 68 "ass.y"
                {num_declarative++;}
-#line 1380 "ass.tab.c"
+#line 1379 "ass.tab.c"
     break;
 
   case 17:
-#line 70 "ass.y"
+#line 69 "ass.y"
                  {num_exclamatory++;}
-#line 1386 "ass.tab.c"
+#line 1385 "ass.tab.c"
     break;
 
   case 18:
-#line 71 "ass.y"
+#line 70 "ass.y"
                   {num_interrogative++;}
-#line 1392 "ass.tab.c"
+#line 1391 "ass.tab.c"
     break;
 
   case 19:
-#line 74 "ass.y"
+#line 73 "ass.y"
          {num_words++;}
-#line 1398 "ass.tab.c"
+#line 1397 "ass.tab.c"
     break;
 
 
-#line 1402 "ass.tab.c"
+#line 1401 "ass.tab.c"
 
       default: break;
     }
@@ -1630,7 +1629,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 83 "ass.y"
+#line 82 "ass.y"
 
 
 int main() {
