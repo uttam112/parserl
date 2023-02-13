@@ -73,9 +73,7 @@
 #include <stdio.h>
 #include<bits/stdc++.h>
 using namespace std;
-int yylex();
-int yyerror(char *s);
-extern FILE* yyin;
+int yyerror(const char *s);
 int num_Chapters = 0;
 int num_Sections = 0;
 int num_sentence=0;
@@ -91,7 +89,7 @@ extern int yylex();
 extern int yyparse();
 extern FILE* yyin;
 
-#line 95 "ass.tab.c"
+#line 93 "ass.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -158,12 +156,12 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 26 "ass.y"
+#line 24 "ass.y"
 
 char* str;
 
 
-#line 167 "ass.tab.c"
+#line 165 "ass.tab.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -482,7 +480,7 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  18
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   21
+#define YYLAST   27
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  15
@@ -491,7 +489,7 @@ union yyalloc
 /* YYNRULES -- Number of rules.  */
 #define YYNRULES  23
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  27
+#define YYNSTATES  28
 
 #define YYUNDEFTOK  2
 #define YYMAXUTOK   269
@@ -539,9 +537,9 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    39,    39,    40,    45,    46,    47,    48,    49,    53,
-      56,    57,    60,    63,    64,    65,    68,    69,    70,    73,
-      74,    77,    78,    79
+       0,    37,    37,    38,    43,    44,    45,    46,    47,    51,
+      54,    55,    58,    61,    62,    63,    66,    67,    68,    71,
+      72,    75,    76,    77
 };
 #endif
 
@@ -582,8 +580,8 @@ static const yytype_int16 yytoknum[] =
 static const yytype_int8 yypact[] =
 {
       -3,    -4,    -4,    -4,    -4,    -4,    -4,    -4,    -4,    -4,
-      19,    -3,    -4,    -4,    -4,     5,     0,     0,    -4,    -4,
-      -4,    -4,    -4,     0,    -4,    -4,    -4
+      20,    -3,    -4,    -4,    -4,    14,     9,     9,    -4,    -4,
+      -4,    -4,    -4,     0,    -4,    -4,    -4,    -4
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -593,13 +591,13 @@ static const yytype_int8 yydefact[] =
 {
        2,     4,     5,     6,    23,    21,    22,    19,    20,    12,
        0,     2,     7,     9,     8,     0,    14,     0,     1,     3,
-      16,    17,    18,    10,    13,    15,    11
+      16,    17,    18,     0,    13,    15,    10,    11
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-      -4,     9,    -4,    -4,    -2,    -4,     1,    -4,    -4,    -4
+      -4,    15,    -4,    -4,     4,    -4,     2,    -4,    -4,    -4
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
@@ -614,15 +612,15 @@ static const yytype_int8 yydefgoto[] =
 static const yytype_int8 yytable[] =
 {
        1,     2,     3,     4,     5,     6,     4,     5,     6,     7,
-       8,     9,     7,     8,    20,    21,    22,    24,    25,    18,
-      19,    26
+       8,     9,     7,     8,    26,     4,     5,     6,    24,    25,
+      18,     7,     8,    20,    21,    22,    19,    27
 };
 
 static const yytype_int8 yycheck[] =
 {
        3,     4,     5,     6,     7,     8,     6,     7,     8,    12,
-      13,    14,    12,    13,     9,    10,    11,    16,    17,     0,
-      11,    23
+      13,    14,    12,    13,    14,     6,     7,     8,    16,    17,
+       0,    12,    13,     9,    10,    11,    11,    23
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -631,7 +629,7 @@ static const yytype_int8 yystos[] =
 {
        0,     3,     4,     5,     6,     7,     8,    12,    13,    14,
       16,    17,    18,    19,    20,    21,    23,    24,     0,    16,
-       9,    10,    11,    22,    21,    21,    19
+       9,    10,    11,    22,    21,    21,    14,    19
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
@@ -646,7 +644,7 @@ static const yytype_int8 yyr1[] =
 static const yytype_int8 yyr2[] =
 {
        0,     2,     0,     2,     1,     1,     1,     1,     1,     1,
-       2,     3,     1,     2,     1,     2,     1,     1,     1,     1,
+       3,     3,     1,     2,     1,     2,     1,     1,     1,     1,
        1,     1,     1,     1
 };
 
@@ -1343,61 +1341,67 @@ yyreduce:
   switch (yyn)
     {
   case 4:
-#line 45 "ass.y"
+#line 43 "ass.y"
             {printf("%s\n",(yyvsp[0].str));}
-#line 1349 "ass.tab.c"
+#line 1347 "ass.tab.c"
     break;
 
   case 5:
-#line 46 "ass.y"
+#line 44 "ass.y"
             {s+=string((yyvsp[0].str)) + "\n";num_Chapters++;}
-#line 1355 "ass.tab.c"
+#line 1353 "ass.tab.c"
     break;
 
   case 6:
-#line 47 "ass.y"
+#line 45 "ass.y"
             {s+="   "+string((yyvsp[0].str)) + "\n";num_Sections++;}
-#line 1361 "ass.tab.c"
+#line 1359 "ass.tab.c"
     break;
 
   case 9:
-#line 53 "ass.y"
+#line 51 "ass.y"
             {num_paragraphs++;}
-#line 1367 "ass.tab.c"
+#line 1365 "ass.tab.c"
+    break;
+
+  case 10:
+#line 54 "ass.y"
+                           {line_num++;}
+#line 1371 "ass.tab.c"
     break;
 
   case 12:
-#line 60 "ass.y"
+#line 58 "ass.y"
                {line_num++;}
-#line 1373 "ass.tab.c"
+#line 1377 "ass.tab.c"
     break;
 
   case 16:
-#line 68 "ass.y"
+#line 66 "ass.y"
                {num_declarative++;}
-#line 1379 "ass.tab.c"
+#line 1383 "ass.tab.c"
     break;
 
   case 17:
-#line 69 "ass.y"
+#line 67 "ass.y"
                  {num_exclamatory++;}
-#line 1385 "ass.tab.c"
+#line 1389 "ass.tab.c"
     break;
 
   case 18:
-#line 70 "ass.y"
+#line 68 "ass.y"
                   {num_interrogative++;}
-#line 1391 "ass.tab.c"
+#line 1395 "ass.tab.c"
     break;
 
   case 19:
-#line 73 "ass.y"
+#line 71 "ass.y"
          {num_words++;}
-#line 1397 "ass.tab.c"
+#line 1401 "ass.tab.c"
     break;
 
 
-#line 1401 "ass.tab.c"
+#line 1405 "ass.tab.c"
 
       default: break;
     }
@@ -1629,7 +1633,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 82 "ass.y"
+#line 80 "ass.y"
 
 
 int main() {
@@ -1654,7 +1658,7 @@ cout<<s<<"\n";
 return 0;
 }
 
-int yyerror(char* s){
+int yyerror(const char* s){
 flag = true;
 cerr<<"ERROR: "<<s<<" at Line Number:" <<line_num<<"\n";
 return 0;

@@ -1,14 +1,16 @@
+%option noyywrap
 %{
 #include<bits/stdc++.h>
 using namespace std;
 #include "ass.tab.h"
 int lnum=1;
 %}
+
 TITLE "Title:"[^\n]+ 
 CHAPTER "Chapter"[^\n]*":"[^\n]+ 
 SECTION "Section"[^\n]*":"[^\n]+ 
 %%
-[\f\r\n"\r\n"]+ { lnum++; /*eat up white spaces*/ return BREAK;}
+[\n]+ { lnum++; /*eat up white spaces*/ return BREAK;}
 [ ]        {return SPACE;}
 [,]        {return COMMA;}
 [;]        {return SEMICOLON;}
@@ -24,5 +26,5 @@ SECTION "Section"[^\n]*":"[^\n]+
 . {cerr<<"Error on line Number:"<<lnum<<"\n";}
 %%
 
-int yywrap() { }
+// int yywrap() { }
 

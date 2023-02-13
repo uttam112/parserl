@@ -4,9 +4,7 @@
 #include <stdio.h>
 #include<bits/stdc++.h>
 using namespace std;
-int yylex();
-int yyerror(char *s);
-extern FILE* yyin;
+int yyerror(const char *s);
 int num_Chapters = 0;
 int num_Sections = 0;
 int num_sentence=0;
@@ -53,7 +51,7 @@ line:
 cpara: para {num_paragraphs++;}
 
 para:
-        sentences end
+        sentences end BREAK{line_num++;}
     |   sentences end para;
 
 para_breaker:
@@ -103,7 +101,7 @@ cout<<s<<"\n";
 return 0;
 }
 
-int yyerror(char* s){
+int yyerror(const char* s){
 flag = true;
 cerr<<"ERROR: "<<s<<" at Line Number:" <<line_num<<"\n";
 return 0;
